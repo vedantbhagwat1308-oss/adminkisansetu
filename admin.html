@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#142f28">
+  <title>KisanSetu Operations | Centre & Government Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <aside class="sidebar" id="sidebar">
+    <a class="brand" href="index.html" aria-label="KisanSetu farmer website">
+      <span class="brand-mark">✦</span><span>Kisan<span>Setu</span></span>
+    </a>
+    <div class="role-badge">OPERATIONS CONSOLE</div>
+    <nav class="main-nav" aria-label="Operations navigation">
+      <button class="nav-link active" data-view="overview"><span>▦</span>Overview</button>
+      <button class="nav-link" data-view="bookings"><span>▤</span>All bookings</button>
+      <button class="nav-link" data-view="centres"><span>⌖</span>Centre management</button>
+      <button class="nav-link" data-view="reports"><span>◌</span>Reports</button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-chip"><span class="avatar">AK</span><div><strong>Anita Kulkarni</strong><small>District coordinator</small></div></div>
+      <button class="sidebar-action" id="settingsBtn">⚙ Settings</button>
+      <a class="sidebar-action farmer-link" href="index.html">↗ Farmer website</a>
+    </div>
+  </aside>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+      <div><p class="breadcrumb">KISANSETU / <span id="viewName">OVERVIEW</span></p><h1 id="pageTitle">Procurement operations</h1></div>
+      <div class="top-actions"><span class="sync-status"><i></i> Live data synced</span><button class="icon-button" id="notificationBtn" aria-label="View notifications">♢<b></b></button><button class="profile-button"><span class="avatar small">AK</span><span class="profile-name">Anita Kulkarni</span>⌄</button></div>
+    </header>
+
+    <section class="page-content" id="overviewView">
+      <div class="intro-row"><div><p class="eyebrow">TUESDAY, 09 SEPTEMBER 2026</p><h2>Good morning, Anita.</h2><p class="muted">Here is today's procurement flow across Pune district.</p></div><div class="intro-actions"><button class="secondary-button" id="exportBtn">⇩ Export report</button><button class="primary-button" id="addBookingBtn">＋ Add booking</button></div></div>
+      <div class="metrics-grid">
+        <article class="metric-card accent-green"><div class="metric-icon">↗</div><p>Total bookings today</p><strong id="totalBookings">248</strong><small><b>+12.4%</b> vs yesterday</small></article>
+        <article class="metric-card accent-gold"><div class="metric-icon">◷</div><p>Waiting for procurement</p><strong id="waitingCount">64</strong><small><b>18 urgent</b> need attention</small></article>
+        <article class="metric-card accent-blue"><div class="metric-icon">⌖</div><p>Active centres</p><strong id="activeCentres">3 / 3</strong><small><b>100%</b> operational</small></article>
+        <article class="metric-card accent-coral"><div class="metric-icon">◉</div><p>Average wait time</p><strong id="averageWait">27 min</strong><small><b>-8 min</b> since morning</small></article>
+      </div>
+
+      <div class="content-grid">
+        <section class="panel queue-panel"><div class="panel-heading"><div><p class="eyebrow">LIVE QUEUE</p><h3>Today's booking flow</h3></div><button class="text-button" id="refreshBtn">↻ Refresh</button></div><div class="chart-wrap"><div class="chart-labels"><span>Bookings</span><span>8 AM&nbsp;&nbsp;&nbsp; 10 AM&nbsp;&nbsp;&nbsp; 12 PM&nbsp;&nbsp;&nbsp; 2 PM&nbsp;&nbsp;&nbsp; 4 PM</span></div><div class="fake-chart" aria-label="Booking flow chart"><span style="height:32%"></span><span style="height:46%"></span><span style="height:40%"></span><span style="height:62%"></span><span style="height:55%"></span><span style="height:78%"></span><span style="height:68%"></span><span style="height:88%"></span><span style="height:74%"></span><span style="height:96%"></span><span style="height:82%"></span><span style="height:91%"></span></div></div><div class="legend"><span><i class="legend-green"></i> Completed</span><span><i class="legend-gold"></i> Waiting</span><span class="updated-label">Last updated just now</span></div></section>
+        <section class="panel activity-panel"><div class="panel-heading"><div><p class="eyebrow">RECENT ACTIVITY</p><h3>Centre updates</h3></div><button class="text-button" id="viewAlertsBtn">View all</button></div><div class="activity-list" id="activityList"></div></section>
+      </div>
+
+      <section class="panel booking-panel"><div class="panel-heading"><div><p class="eyebrow">BOOKING CONTROL</p><h3>Latest bookings</h3></div><button class="secondary-button compact" data-view-target="bookings">View all bookings →</button></div><div class="table-scroll"><table><thead><tr><th>Farmer & token</th><th>Centre</th><th>Crop</th><th>Slot</th><th>Queue</th><th>Status</th><th></th></tr></thead><tbody id="bookingTable"></tbody></table></div></section>
+    </section>
+
+    <section class="page-content hidden" id="bookingsView"><div class="intro-row"><div><p class="eyebrow">BOOKING CONTROL</p><h2>All procurement bookings</h2><p class="muted">Search, update, and resolve farmer bookings from one view.</p></div><div class="intro-actions"><button class="secondary-button" id="exportAllBtn">⇩ Export CSV</button><button class="primary-button" id="addBookingBtnTwo">＋ Add booking</button></div></div><div class="toolbar"><label class="search-box">⌕<input id="searchInput" type="search" placeholder="Search farmer, token or centre"></label><select id="statusFilter"><option value="all">All statuses</option><option value="Waiting">Waiting</option><option value="In progress">In progress</option><option value="Completed">Completed</option></select><select id="centreFilter"><option value="all">All centres</option><option>Shivajinagar Centre</option><option>Hadapsar Centre</option><option>Baramati Centre</option></select></div><section class="panel booking-panel"><div class="table-scroll"><table><thead><tr><th>Farmer & token</th><th>Centre</th><th>Crop</th><th>Slot</th><th>Queue</th><th>Status</th><th></th></tr></thead><tbody id="allBookingTable"></tbody></table></div></section></section>
+
+    <section class="page-content hidden" id="centresView"><div class="intro-row"><div><p class="eyebrow">CENTRE MANAGEMENT</p><h2>Centre performance</h2><p class="muted">Monitor counters, capacity, and intake status for every location.</p></div><button class="primary-button" id="broadcastBtn">⌁ Broadcast update</button></div><div class="centre-admin-grid" id="centreAdminGrid"></div></section>
+
+    <section class="page-content hidden" id="reportsView"><div class="intro-row"><div><p class="eyebrow">DISTRICT REPORTS</p><h2>Procurement performance</h2><p class="muted">A clear snapshot for daily government review.</p></div><button class="primary-button" id="downloadReportBtn">⇩ Download report</button></div><div class="report-grid"><div class="panel report-card"><p class="eyebrow">CROP MIX</p><h3>Today's procurement</h3><div class="bar-row"><span>Wheat</span><div><i style="width:72%"></i></div><b>72%</b></div><div class="bar-row"><span>Rice</span><div><i style="width:54%"></i></div><b>54%</b></div><div class="bar-row"><span>Soybean</span><div><i style="width:39%"></i></div><b>39%</b></div><div class="bar-row"><span>Maize</span><div><i style="width:26%"></i></div><b>26%</b></div></div><div class="panel report-card"><p class="eyebrow">SERVICE LEVEL</p><h3>Centre targets</h3><div class="target-row"><span>Under 30 min wait</span><strong>86%</strong><i><b style="width:86%"></b></i></div><div class="target-row"><span>Tokens processed</span><strong>74%</strong><i><b style="width:74%"></b></i></div><div class="target-row"><span>Farmer no-shows</span><strong>8%</strong><i><b style="width:8%"></b></i></div></div></div></section>
+  </main>
+
+  <div class="modal" id="detailModal" aria-hidden="true"><div class="modal-card"><button class="close" data-close="detailModal">×</button><p class="eyebrow">BOOKING DETAILS</p><h2 id="detailTitle">Farmer booking</h2><div id="detailContent"></div></div></div>
+  <div class="modal" id="addModal" aria-hidden="true"><div class="modal-card"><button class="close" data-close="addModal">×</button><p class="eyebrow">MANUAL ENTRY</p><h2>Add procurement booking</h2><form id="addForm"><label>Farmer name<input id="addName" required placeholder="Enter farmer name"></label><label>Centre<select id="addCentre"><option>Shivajinagar Centre</option><option>Hadapsar Centre</option><option>Baramati Centre</option></select></label><label>Crop<select id="addCrop"><option>Wheat</option><option>Rice</option><option>Soybean</option><option>Maize</option></select></label><label>Slot<select id="addSlot"><option>08:00 - 10:00</option><option>10:00 - 12:00</option><option>12:00 - 14:00</option><option>14:00 - 16:00</option></select></label><button class="primary-button full" type="submit">Create booking</button></form></div></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="admin.js"></script>
+</body>
+</html>
